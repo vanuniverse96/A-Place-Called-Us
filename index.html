@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💜 Our Little Universe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #9d4edd;
+            --secondary: #c77dff;
+            --accent: #e0aaff;
+            --dark-bg: #10002b;
+            --mid-bg: #240046;
+            --card-bg: rgba(61, 18, 95, 0.6);
+            --text-light: #e0aaff;
+            --text-white: #ffffff;
+            --neon-purple: #bf00ff;
+            --neon-pink: #ff006e;
+            --neon-blue: #7209b7;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #10002b 0%, #240046 50%, #3c096c 100%);
+            min-height: 100vh;
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Starry Background */
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .star-twinkle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Aurora Effect */
+        .aurora {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(157, 78, 221, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(199, 125, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(224, 170, 255, 0.2) 0%, transparent 50%);
+            animation: aurora-move 20s infinite ease-in-out;
+        }
+
+        @keyframes aurora-move {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(5%, 5%) rotate(120deg);
+            }
+            66% {
+                transform: translate(-5%, -5%) rotate(240deg);
+            }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(157, 78, 221, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-particle 15s infinite ease-in-out;
+        }
+
+        @keyframes float-particle {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-120vh) translateX(0);
+                opacity: 0;
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            animation: glow-pulse 3s ease-in-out infinite, fade-in 1s ease-out;
+            text-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+            filter: drop-shadow(0 0 10px rgba(199, 125, 255, 0.6));
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px rgba(199, 125, 255, 0.6));
+            }
+            50% {
+                filter: drop-shadow(0 0 25px rgba(199, 125, 255, 0.9));
+            }
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 300;
+            animation: fade-in 1s 0.3s ease-out backwards;
+            text-shadow: 0 0 10px rgba(224, 170, 255, 0.5);
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            position: sticky;
+            top: 0;
+            background: linear-gradient(180deg, rgba(16, 0, 43, 0.95) 0%, transparent 100%);
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            border-bottom: 1px solid rgba(157, 78, 221, 0.3);
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-tab {
+            padding: 8px 16px;
+            background: var(--card-bg);
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--text-light);
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(157, 78, 221, 0.2);
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            color: white;
+            border-color: var(--neon-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(191, 0, 255, 0.6),
+                        0 8px 32px rgba(157, 78, 221, 0.4);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 1rem 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        section {
+            display: none;
+            animation: section-appear 0.5s ease-out;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        @keyframes section-appear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                        0 0 20px rgba(157, 78, 221, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
+                        0 0 35px rgba(199, 125, 255, 0.5);
+            border-color: var(--neon-purple);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            filter: drop-shadow(0 0 10px rgba(199, 125, 255, 0.4));
+        }
+
+        /* Buttons */
+        button, .btn {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            color: white;
+            border: 2px solid var(--neon-pink);
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(191, 0, 255, 0.4),
+                        0 8px 32px rgba(157, 78, 221, 0.3);
+        }
+
+        button:hover, .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(191, 0, 255, 0.8),
+                        0 8px 40px rgba(157, 78, 221, 0.5);
+            border-color: var(--accent);
+        }
+
+        button:active, .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Daily Note */
+        #daily-note-content {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.3), rgba(199, 125, 255, 0.2));
+            padding: 1.5rem;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: center;
+            margin: 1.5rem 0;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            color: var(--text-light);
+            border: 1px solid rgba(157, 78, 221, 0.4);
+            box-shadow: inset 0 0 20px rgba(157, 78, 221, 0.2);
+        }
+
+        /* Open When Letters */
+        .letter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .letter-card {
+            background: rgba(61, 18, 95, 0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .letter-card::before {
+            content: '💌';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            opacity: 0.3;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 110, 0.5));
+        }
+
+        .letter-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 30px rgba(191, 0, 255, 0.5);
+            background: rgba(61, 18, 95, 0.7);
+        }
+
+        .letter-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(224, 170, 255, 0.5);
+        }
+
+        .letter-content {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px dashed rgba(157, 78, 221, 0.5);
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .letter-content.hidden {
+            display: none;
+        }
+
+        /* Constellation */
+        #stars-container {
+            position: relative;
+            height: 600px;
+            background: linear-gradient(180deg, #0a0015 0%, #1a0033 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            box-shadow: inset 0 0 50px rgba(157, 78, 221, 0.2);
+        }
+
+        .star {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(199, 125, 255, 0.8) 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 0 20px rgba(199, 125, 255, 0.8);
+            animation: star-glow 2s infinite ease-in-out;
+        }
+
+        @keyframes star-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(199, 125, 255, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 35px rgba(191, 0, 255, 1);
+            }
+        }
+
+        .star:hover {
+            transform: scale(1.3);
+            box-shadow: 0 0 40px rgba(191, 0, 255, 1);
+        }
+
+        /* Overlay untuk popup di mobile */
+        .popup-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            border-radius: 20px;
+        }
+
+        .popup-overlay.active {
+            display: block;
+        }
+
+        .star-detail {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(36, 0, 70, 0.95), rgba(60, 9, 108, 0.95));
+            padding: 1.5rem;
+            border-radius: 15px;
+            max-width: 280px;
+            display: none;
+            z-index: 101;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8),
+                        0 0 30px rgba(157, 78, 221, 0.6);
+            border: 2px solid var(--neon-purple);
+            animation: popup-appear 0.3s ease-out;
+            backdrop-filter: blur(15px);
+        }
+
+        .star-detail.active {
+            display: block;
+        }
+
+        @keyframes popup-appear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .star-detail h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(224, 170, 255, 0.5);
+        }
+
+        .star-detail .date {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .star-detail p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .star-detail .close-popup {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            color: white;
+            border: 1px solid var(--accent);
+            padding: 6px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            float: right;
+            box-shadow: 0 0 15px rgba(191, 0, 255, 0.5);
+        }
+
+        .star-detail .close-popup:hover {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            box-shadow: 0 0 25px rgba(255, 0, 110, 0.7);
+        }
+
+        /* Gratitude */
+        #gratitude-content {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.3), rgba(199, 125, 255, 0.2));
+            padding: 1.5rem;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: center;
+            margin: 1.5rem 0;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            border: 1px solid rgba(157, 78, 221, 0.4);
+            box-shadow: inset 0 0 20px rgba(157, 78, 221, 0.2);
+        }
+
+        /* Music Box Styling */
+        .music-box {
+            background: rgba(61, 18, 95, 0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3),
+                        0 0 20px rgba(157, 78, 221, 0.2);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--neon-purple);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(157, 78, 221, 0.3);
+        }
+
+        .music-box:hover {
+            transform: translateX(5px);
+            box-shadow: 0 0 30px rgba(191, 0, 255, 0.4);
+            border-left-color: var(--neon-pink);
+        }
+
+        .song .title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+            text-shadow: 0 0 10px rgba(224, 170, 255, 0.5);
+        }
+
+        .song .artist {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .music-box audio {
+            width: 100%;
+            height: 45px;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+        }
+
+        /* Memory Box Styles */
+        .memory-item {
+            background: rgba(61, 18, 95, 0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3),
+                        0 0 20px rgba(157, 78, 221, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(157, 78, 221, 0.3);
+        }
+
+        .memory-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(191, 0, 255, 0.5);
+            border-color: var(--neon-purple);
+        }
+
+        .memory-item h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(224, 170, 255, 0.5);
+        }
+
+        .memory-date {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .memory-item p {
+            line-height: 1.7;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .memory-photo {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 1rem;
+            object-fit: cover;
+            max-height: 400px;
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.3);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .nav-tabs {
+                padding: 0.5rem;
+            }
+            
+            .nav-tab {
+                padding: 8px 14px;
+                font-size: 0.85rem;
+            }
+            
+            .card {
+                padding: 1.25rem;
+            }
+
+            .letter-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            #stars-container {
+                height: 500px;
+            }
+
+            .star {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+
+            .star-detail {
+                position: fixed !important;
+                left: 50% !important;
+                top: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                max-width: calc(100% - 40px);
+                width: 85%;
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+
+            .star-detail.active {
+                animation: popup-mobile-appear 0.3s ease-out;
+            }
+
+            @keyframes popup-mobile-appear {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1);
+                }
+            }
+
+            #daily-note-content,
+            #gratitude-content {
+                padding: 1.25rem;
+                font-size: 1rem;
+                min-height: 100px;
+            }
+
+            button, .btn {
+                padding: 10px 24px;
+                font-size: 0.95rem;
+            }
+
+            .music-box {
+                padding: 1.25rem;
+            }
+
+            .song .title {
+                font-size: 1rem;
+            }
+
+            .song .artist {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1.5rem 1rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .nav-tab {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            main {
+                padding: 0 0.75rem 2rem;
+            }
+
+            .star-detail {
+                width: 90%;
+                padding: 1.25rem;
+            }
+
+            .star-detail h4 {
+                font-size: 1rem;
+            }
+
+            .star-detail p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Starry Background -->
+    <div class="stars-bg" id="stars-bg"></div>
+    
+    <!-- Aurora Effect -->
+    <div class="aurora"></div>
+
+    <!-- Header -->
+    <header>
+        <h1>💜 A Place Called Us</h1>
+        <p class="subtitle">Where our moments stay, quietly</p>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <div class="nav-tab active" onclick="showSection('daily-note')">Daily Note</div>
+        <div class="nav-tab" onclick="showSection('open-when')">Open When</div>
+        <div class="nav-tab" onclick="showSection('memory-box')">Memory Box</div>
+        <div class="nav-tab" onclick="showSection('constellation')">Stars</div>
+        <div class="nav-tab" onclick="showSection('playlist')">Playlist</div>
+    </div>
+
+    <main>
+        <!-- Daily Love Note -->
+        <section id="daily-note" class="active">
+            <div class="card">
+                <h2>💜 Surat Kecil Buat Kamu</h2>
+                <div id="daily-note-content">
+                    Setiap hari bersamamu adalah berkah yang aku syukuri 💜
+                </div>
+                <center><button onclick="generateDailyNote()">Acak Note</button></center>
+            </div>
+        </section>
+
+        <!-- Open When Letters -->
+<section id="open-when">
+    <div class="card">
+        <h2>💜 Open When... Letters</h2>
+
+        <div class="letter-grid" id="letter-grid">
+
+            <div class="letter-card" onclick="toggleLetter(0)">
+                <h3>Open when you miss me</h3>
+                <div class="letter-content hidden" id="letter-0">
+                    kalau kamu buka ini, berarti aku menang lagi 😌  
+                    iya, kamu kangen aku. aku juga sih… cuma emang aku keliatan gengsi parah 😁
+                </div>
+            </div>
+
+            <div class="letter-card" onclick="toggleLetter(1)">
+                <h3>Open when you feel lonely</h3>
+                <div class="letter-content hidden" id="letter-1">
+                    sendirian? no no ya 😤😤 kamu kan punya aku 👀  
+                    aku emang gak kelihatan, tapi aku setia nemenin dari jauh.  
+                    jauh aja aku setia apa lagi kalau deket 😆❤️❤️❤️❤️
+                </div>
+            </div>
+
+            <div class="letter-card" onclick="toggleLetter(2)">
+                <h3>Open when you're happy</h3>
+                <div class="letter-content hidden" id="letter-2">
+                    widihh di klik 😌  
+                    tapi bagus sih, aku suka lihat kamu bahagia —  
+                    apalagi kalau bahagianya karena aku asekkk 🤣❤️❤️❤️
+                </div>
+            </div>
+
+            <div class="letter-card" onclick="toggleLetter(3)">
+                <h3>Open when you feel tired</h3>
+                <div class="letter-content hidden" id="letter-3">
+                    capek? wajar. kamu kan manusia, bukan charger 🤨  
+                    istirahat dulu. jangan keras-keras sama diri sendiri.  
+                    kalau masih capek, ada aku... siap nemenin 👀❤️
+                </div>
+            </div>
+
+            <div class="letter-card" onclick="toggleLetter(4)">
+                <h3>Open When You Wake Up</h3>
+                <div class="letter-content hidden" id="letter-4">
+                    selamat pagi cinta ku, sayang ku.  
+                    semoga hari ini kamu bangun dengan perasaan yang baik.  
+                    kalaupun ada yang berat, nggak apa-apa, jalanin pelan-pelan aja ya.
+
+                    ingat, kamu selalu punya tempat pulang.  
+                    kalau capek, kalau kesel, kalau dunia rasanya ribet,  
+                    ceritain ke aku nanti.
+
+                    biar aku dengerin,  
+                    biar aku temenin,  
+                    dan biar aku bantu kamu lupa sebentar sama hal-hal yang bikin lelah.
+
+                    Love you always ❤️
+                </div>
+            </div>
+
+            <div class="letter-card" onclick="toggleLetter(5)">
+                <h3>Open When You Sleep</h3>
+                <div class="letter-content hidden" id="letter-5">
+                    selamat malam sayang ku cintaku.  
+                    jangan lupa doa dulu sebelum tidur ya 😌  
+                    terus abis itu… mimpiin aku mwhehehehe 👀❤️
+
+                    kalau nggak mimpiin aku,  
+                    besok aku ngambek dikit (boong) 😤  
+                    tapi tetep… aku sayang kamu banget ❤️❤️
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+        </section>
+
+        <!-- Memory Box -->
+        <section id="memory-box">
+            <div class="card">
+                <h2>Memory Box</h2>
+                <p style="text-align: center; margin-bottom: 1.5rem;">adalah pokoknya </p>
+                
+                <div id="memory-list">
+                    <div class="memory-item">
+                        <h3>Aneh </h3>
+                        <div class="memory-date">29 November 2025</div>
+                        <p>Siapa sangka kalau dulu sering dikatain Zoe, "udah itu sama Zall aja", "gapapa sesekali biar hidupmu nggak gitu-gitu aja", sekarang malah kejadian. Padahal dulu aku sering banget mikir, "ini orang kenapa emot love terus dah" hahaha. Aku berusaha nggak nanggepin kamu, tapi lama-lama aku mikir, mending diimbangin aja nggak sih 👀👀
+
+                          Pas udah diimbangin, malah aku yang luluh. Mulai muncul perasaan aneh, mikir berkali-kali, "nggak mungkin", sampai Dev sendiri bilang aku otak udang karena nggak ngerti perasaanku sendiri. Ya gimana ya, pengen bilang tapi gengsi—bukan gengsi sih, lebih ke takut, "kalau ternyata aku jatuh cinta sendirian kan lucu" 😌😌
+
+                          Tapi ternyata hahaha siapa sangka udah sejauh ini. Pokoknya… hmm, setiap hari rasanya aku jatuh cinta terus-terusan. I love you so muchhhhhhhh huhh, kata-kata aja nggak cukup buat ini ❤️❤️❤️</p>
+                        <img src="photos/u.jpeg" class="memory-photo" alt="First meeting">
+                    </div>
+
+                    <div class="memory-item">
+                        <h3>Rumah = Kamu </h3>
+                        <div class="memory-date">23 Desember 2025</div>
+                        <p>Gatau ya, waktu itu kayaknya aku menemukan yang selama ini aku cari. Rumah… rumah yang lama hilang dan aku cari-cari.
+
+Dulu aku seneng banget pas tau Dev bilang ke kamu, dan kamu beneran masuk ke map itu. Aku cuma bisa mikir, hmm… gitu deh, pokoknya. Intinya, di hari itu aku bener-bener jatuh—sejatuh-jatuhnya.
+
+Terus kamu bilang, "besok aku kirim pesan pagi-pagi."
+Hal itu bikin aku hidup lagi. Ada sesuatu yang aku tunggu, dan sampai sekarang hal itu masih terus aku tunggu.
+
+Terima kasih banyak karena selalu nemenin aku sampai sekarang, sayangku, cintaku. Lopyu, mwahhh ❤️❤️❤️</p>
+                        <img src="photos/i.jpeg" class="memory-photo" alt="Beach day">
+                    </div>
+                    </div>
+                    <div class="memory-item">
+                        <h3>Hmm </h3>
+                        <div class="memory-date">-</div>
+                        <p>Kadang aku nggak pandai nunjukin perasaanku,
+banyak hal yang pengen aku omongin tapi malah aku simpan sendiri.
+Bukan karena nggak mau jujur,
+tapi karena perasaanku ke kamu tumbuh pelan-pelan dan dalam.
+
+Aku jatuh cinta sama kamu bukan karena alasan besar,
+tapi karena hal-hal kecil yang kamu lakukan,
+cara kamu cerita, cara kamu ada,
+dan cara kamu bikin hariku terasa lebih ringan.
+
+Setiap pesan dari kamu, setiap hal yang kamu bagi,
+selalu berhasil bikin mood aku jadi lebih baik.
+Dan tanpa sadar, kamu jadi salah satu bagian penting di hidup aku.
+
+Aku harap kita bisa terus berjalan sejauh mungkin,
+saling jaga, saling ngerti, dan tumbuh bareng.
+Bukan karena takut kehilangan,
+tapi karena sama-sama mau bertahan. ❤️❤️❤️</p>
+                        
+                    </div>
+                    <div class="memory-item">
+                        <h3>Hmm </h3>
+                        <div class="memory-date">-</div>
+                        <p>Perasaanku ke kamu bukan datang tiba-tiba,
+tapi tumbuh dari banyak momen kecil yang nggak pernah aku rencanakan.
+Semakin kenal, semakin nyaman,
+dan semakin sulit buat pura-pura biasa.
+
+Mungkin aku nggak selalu pandai bilang,
+tapi aku tulus menikmati setiap prosesnya.</p>
+                    </div>
+                    <div class="memory-item">
+                        <h3>Hmm </h3>
+                        <div class="memory-date">-</div>
+                        <p>Aku suka pura-pura biasa aja,
+padahal aslinya sering nungguin kabar dari kamu.
+Kalau kamu lama bales, aku sok sibuk,
+tapi dalam hati udah mikir macem-macem.
+
+Aku nggak bilang aku butuh kamu setiap waktu,
+tapi jujur aja…
+hari-hariku selalu lebih baik kalau ada kamu.</p>
+                    </div>
+                <div class="memory-item">
+                        <h3>Hmm </h3>
+                        <div class="memory-date">-</div>
+                        <p>Dari sekian banyak hal yang bisa bikin aku senang,
+kamu termasuk salah satu yang paling konsisten.
+Bukan karena kamu sempurna,
+tapi karena aku merasa diterima apa adanya.
+
+Dan itu cukup buat bikin kamu jadi penting di hidup aku.</p>
+                    </div>
+                    <div class="memory-item">
+                        <h3>Hmm </h3>
+                        <div class="memory-date">-</div>
+                        <p>Aku nggak tau cara paling sempurna buat mencintai,
+tapi aku selalu berusaha hadir dengan cara terbaik yang aku bisa.
+Dengerin kamu, ngertiin kamu,
+dan ada buat kamu.
+
+Kalau itu belum cukup jelas,
+biar aku bilang pelan-pelan
+aku sayang kamu, sungguh...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Constellation of Memories -->
+        <section id="constellation">
+            <div class="card">
+                <h2>⭐ Bintang</h2>
+                <p style="text-align: center; margin-bottom: 1rem;">Klik bintang untuk membaca ceritanya</p>
+                <div id="stars-container">
+                    <div class="popup-overlay" id="popup-overlay" onclick="closeStarPopup()"></div>
+                    <div id="star-popup" class="star-detail"></div>
+                </div>
+            </div>
+          </section>
+
+        <!-- Playlist -->
+        <section id="playlist">
+            <div class="card">
+                <h2>🎵 Play Something Sweet</h2>
+                
+                <div style="background: rgba(61, 18, 95, 0.5); border-radius: 15px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid rgba(157, 78, 221, 0.3);">
+                    <div id="current-player" style="text-align: center;">
+                        <p style="color: var(--text-light); margin-bottom: 1rem;">Klik lagu di bawah untuk memutar 🎵</p>
+                    </div>
+                </div>
+
+                <div class="music-box">
+                    <div class="song">
+                        <div class="title">P.S I Love You</div>
+                        <div class="artist">Paul Partohap</div>
+                    </div>
+                    <audio controls preload="metadata">
+                        <source src="audio/P.S. I LOVE YOU (Lyric Video) (128K).mp3.mpeg" type="audio/mpeg">
+                        Browser kamu tidak mendukung audio.
+                    </audio>
+                </div>
+
+                <div class="music-box">
+                    <div class="song">
+                        <div class="title">I Lay My Love on You</div>
+                        <div class="artist">Westlife</div>
+                    </div>
+                    <audio controls preload="metadata">
+                        <source src="audio/2_5229210970227741783.mp3.mpeg" type="audio/mpeg">
+                        Browser kamu tidak mendukung audio.
+                    </audio>
+                </div>
+
+                <div class="music-box">
+                    <div class="song">
+                        <div class="title">Best Part</div>
+                        <div class="artist">Daniel Caesar & H.E.R.</div>
+                    </div>
+                    <audio controls preload="metadata">
+                        <source src="audio/02. Best Part (Ft. H.E.R.)(1).mp3.mpeg" type="audio/mpeg">
+                        Browser kamu tidak mendukung audio.
+                    </audio>
+                </div>
+
+                <div class="music-box">
+                    <div class="song">
+                        <div class="title">Give Me Your Forever</div>
+                        <div class="artist">Zack Tabudlo</div>
+                    </div>
+                    <audio controls preload="metadata">
+                        <source src="audio/Give Me Your Forever - Zack Tabudlo.mp3.mpeg" type="audio/mpeg">
+                        Browser kamu tidak mendukung audio.
+                    </audio>
+                </div>
+
+                <div class="music-box">
+                    <div class="song">
+                        <div class="title">I Like Me Better</div>
+                        <div class="artist">Lauv</div>
+                    </div>
+                    <audio controls preload="metadata">
+                        <source src="audio/Lauv - I Like Me Better.mp3.mpeg" type="audio/mpeg">
+                        Browser kamu tidak mendukung audio.
+                    </audio>
+                </div>
+
+                <div class="music-box">
+                    <div class="song">
+                        <div class="title">My Love</div>
+                        <div class="artist">Westlife</div>
+                    </div>
+                    <audio controls preload="metadata">
+                        <source src="audio/Westlife - My Love.mp3" type="audio/mpeg">
+                        Browser kamu tidak mendukung audio.
+                    </audio>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Static data
+        const dailyNotes = [
+            "aku selalu jatuh cinta lagi dan lagi, sama kamu tolong jangan pelet aku 😤",
+            "kamu bikin aku senyum tanpa sadar terus terusan nggak sopan omm 😤❤️",
+            "gimana ya kalau aku jatuhnya bukan ke cinta, tapi ke kamu 👀❤️",
+            "I love you sayang kuuuu ❤️❤️❤️❤️❤️",
+            "kamu ngomong biasa aja, aku udah senyum. curang huuuuuuuu 😤👎🏻❤️",
+            "Kamu tau nggak? Aku tuh gampang kangen, apalagi sama kamu😌 cuma ga berani ngomong nya :D",
+            "kamu tau ga kalau kamu itu rumah, tanpa alamat 👀👀",
+            "hmmm kamu lucu sih, pantes aja aku betah 👀❤️",
+            "aku nggak minta banyak, cukup kamu aja sebenernya",
+            "aku nggak tau masa depan gimana, tapi hari ini aku milih kamu",
+
+        ];
+        const starMemories = [
+            {
+                title: "suara itu",
+                date: "hehehehe",
+                story: "aku inget pertama kali denger kamu ketawa di situ bener bener aku jatuh cinta sama kamu udah jatuh cinta makin jatuh 👀❤️",
+                position: { left: "15%", top: "15%" }
+            },
+            {
+                title: "maaf ya",
+                date: "duarius ini",
+                story: "maaf ya kalau aku suka hilang hilang, sebenernya aku mau banget ganggu kamu tapi kepalaku berisik kaya suara nyamuk bilang (jangan nanti ganggu) :D",
+                position: { left: "45%", top: "10%" }
+            },
+            {
+                title: "jangan bosen",
+                date: "hehehe",
+                story: "aku berharap kamu ga bosen sama aku hehehehehe soal nya aku jarang kasih kabar atau apapun itu :D pliss jangan tinggalin aku ❤️❤️❤️",
+                position: { left: "75%", top: "18%" }
+            },
+            {
+                title: "kok bisa",
+                date: "aku heran",
+                story: "bahkan aku heran kenapa ya aku ga mampu bilang kangen sama kamu🤔 padahal kamu bisa bilang begitu 😌❤️",
+                position: { left: "25%", top: "32%" }
+            },
+            {
+                title: "stalking mode",
+                date: "ekhemmm",
+                story: "kadang aku suka diam diam lihat postingan ulang mu... 👀",
+                position: { left: "60%", top: "28%" }
+            },
+            {
+                title: "cihuyy",
+                date: "hehehe",
+                story: "kamu ga perlu jadi apa pun karena udah sempurna di hati ku anjayyy ❤️❤️",
+                position: { left: "85%", top: "35%" }
+            },
+            {
+                title: "akuu ada akuu",
+                date: "ekhemmm",
+                story: "kalau dunia bikin kamu ngerasa kecil, pulang aja ke aku",
+                position: { left: "18%", top: "48%" }
+            },
+            {
+                title: "aku lebih lebih dari kata lebih",
+                date: "ekhemmm",
+                story: "aku cinta kamu bahkan di versi dirimu yang kamu gak suka",
+                position: { left: "50%", top: "45%" }
+            },
+            {
+                title: "favorit sih emang",
+                date: "ekhemmm",
+                story: "suara ketawa kamu adalah hal kecil yang selalu bikin aku jatuh cinta lagi pokok nya setiap denger aku pasti luluh😌❤️❤️",
+                position: { left: "72%", top: "52%" }
+            },
+            {
+                title: "apa ya ga bisa banget",
+                date: "hmmm",
+                story: "rasanya mau marah pun ga bisa deh kalau udah lihat notif mu 👀👀",
+                position: { left: "32%", top: "62%" }
+            },
+            {
+                title: "kacau sih emang",
+                date: "meleleh",
+                story: "apa lagi pas kamu panggil aku (sayang ku) beuhhh meleleh aku mass 👀❤️❤️",
+                position: { left: "10%", top: "68%" }
+            },
+            {
+                title: "hehehehe",
+                date: "hehehehe",
+                story: "hehehe maaf kadang kamu harus inisiatif buat ngertiin aku, gatau kenapa aku gengsiiiiii 😭😭😭😭😭😭",
+                position: { left: "55%", top: "65%" }
+            },
+            {
+                title: "pelan pelann sajaa wkwkwk",
+                date: "ehemm",
+                story: "aku.... aku bakal berusaha buat nunjukin itu semua pelan pelan :D",
+                position: { left: "78%", top: "72%" }
+            },
+            {
+                title: "aku lebihh ",
+                date: "tigarius ekhemm",
+                story: "kalau kamu bilang kamu paling cinta, jangan harap aku jauh lebih cinta 1.000.000.000% dari kamu cuma aku ga nunjukin 😭❤️",
+                position: { left: "38%", top: "80%" }
+            },
+            {
+                title: "gombal dikit ",
+                date: "hehehehe",
+                story: "meski jarak antara  i dan u berjauhan dari j k l m n o p q r s t, aku bisa melewati semua nya dan sampai ke pada mu 👀❤️❤️❤️❤️",
+                position: { left: "62%", top: "85%" }
+            },{
+                title: "ekhemm ",
+                date: "hehehehe",
+                story: "Aku mulai mengerti arti pulang, bukan ke tempat, tapi ke seseorang.❤️❤️",
+                position: { left: "62%", top: "85%" }
+            },{
+                title: "ekhemm ",
+                date: "hehehehe",
+                story: "i love youuuu more than anythingggg ❤️❤️",
+                position: { left: "62%", top: "85%" }
+            }
+        ];
+
+        // Create twinkling stars background
+        function createStarryBackground() {
+            const container = document.getElementById('stars-bg');
+            
+            // Create many small stars
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star-twinkle';
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(star);
+            }
+
+            // Create floating particles
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.bottom = '-50px';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        createStarryBackground();
+
+        // Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+
+            if (sectionId === 'constellation') {
+                loadConstellation();
+            }
+        }
+
+        // Daily Notes
+        function generateDailyNote() {
+            const randomNote = dailyNotes[Math.floor(Math.random() * dailyNotes.length)];
+            document.getElementById('daily-note-content').textContent = randomNote;
+        }
+
+        // Open When Letters
+        function toggleLetter(index) {
+            const content = document.getElementById(`letter-${index}`);
+            content.classList.toggle('hidden');
+        }
+
+        // Constellation
+        function loadConstellation() {
+            const container = document.getElementById('stars-container');
+            
+            const popup = document.getElementById('star-popup');
+            const overlay = document.getElementById('popup-overlay');
+            container.innerHTML = '';
+            container.appendChild(overlay);
+            container.appendChild(popup);
+
+            starMemories.forEach((memory, i) => {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.textContent = '⭐';
+                star.style.left = memory.position.left;
+                star.style.top = memory.position.top;
+                
+                star.onclick = (e) => {
+                    e.stopPropagation();
+                    showStarPopup(memory, star);
+                };
+                
+                container.appendChild(star);
+            });
+
+            // Add decorative stars
+            for (let i = 0; i < 50; i++) {
+                const decor = document.createElement('div');
+                decor.style.position = 'absolute';
+                decor.style.width = Math.random() * 3 + 1 + 'px';
+                decor.style.height = Math.random() * 3 + 1 + 'px';
+                decor.style.background = 'white';
+                decor.style.borderRadius = '50%';
+                decor.style.left = Math.random() * 100 + '%';
+                decor.style.top = Math.random() * 100 + '%';
+                decor.style.opacity = Math.random() * 0.7 + 0.3;
+                decor.style.boxShadow = '0 0 ' + (Math.random() * 5 + 2) + 'px rgba(199, 125, 255, 0.8)';
+                container.appendChild(decor);
+            }
+
+            container.onclick = (e) => {
+                if (e.target === container) {
+                    closeStarPopup();
+                }
+            };
+        }
+
+        function showStarPopup(memory, starElement) {
+            const popup = document.getElementById('star-popup');
+            const overlay = document.getElementById('popup-overlay');
+            
+            overlay.classList.add('active');
+            
+            if (window.innerWidth > 768) {
+                const container = document.getElementById('stars-container');
+                const containerRect = container.getBoundingClientRect();
+                
+                let left = starElement.offsetLeft + 50;
+                let top = starElement.offsetTop;
+                
+                if (left + 300 > containerRect.width) {
+                    left = starElement.offsetLeft - 310;
+                }
+                
+                if (top + 200 > containerRect.height) {
+                    top = containerRect.height - 210;
+                }
+                
+                popup.style.left = left + 'px';
+                popup.style.top = top + 'px';
+            }
+            
+            popup.innerHTML = `
+                <h4>⭐ ${memory.title}</h4>
+                <div class="date">${memory.date}</div>
+                <p>${memory.story}</p>
+                <button class="close-popup" onclick="closeStarPopup()">Tutup</button>
+            `;
+            
+            popup.classList.add('active');
+        }
+
+        function closeStarPopup() {
+            const popup = document.getElementById('star-popup');
+            const overlay = document.getElementById('popup-overlay');
+            
+            if (popup) {
+                popup.classList.remove('active');
+            }
+            if (overlay) {
+                overlay.classList.remove('active');
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            generateDailyNote();
+        });
+    </script>
+</body>
+</html>
